@@ -39,6 +39,21 @@ async function obtenirRotationDepart() {
 }
 let positionalphaActuelle=0;
 let positionbetaActuelle=0;
+async function obtenirRotationDepart() {
+    // 2. Écouter le tout premier événement généré
+    const recupererPremiereValeur = (event) => {
+      // Les trois axes de rotation (en degrés)
+      // Traiter la valeur de départ ici...
+      positionDebase.alpha = event.alpha;
+      positionDebase.beta = event.beta;
+      positionDebase.gamma = event.gamma;
+
+      // 3. Supprimer immédiatement l'écouteur pour ne pas suivre les mouvements futurs
+      window.removeEventListener('deviceorientation', recupererPremiereValeur);
+    };
+
+    window.addEventListener('deviceorientation', recupererPremiereValeur);
+}
 let positionDebase=obtenirRotationDepart();
 let vaisseau=document.getElementById("starship");
 function bougerEnfoctionDeRotation()
@@ -67,21 +82,7 @@ function checkCollisions(box1, box2){
         }
 }
 
-async function obtenirRotationDepart() {
-    // 2. Écouter le tout premier événement généré
-    const recupererPremiereValeur = (event) => {
-      // Les trois axes de rotation (en degrés)
-      // Traiter la valeur de départ ici...
-      positionDebase.alpha = event.alpha;
-      positionDebase.beta = event.beta;
-      positionDebase.gamma = event.gamma;
 
-      // 3. Supprimer immédiatement l'écouteur pour ne pas suivre les mouvements futurs
-      window.removeEventListener('deviceorientation', recupererPremiereValeur);
-    };
-
-    window.addEventListener('deviceorientation', recupererPremiereValeur);
-}
 
 
 // Correction syntaxe : Remplacement des assignations erronées (=) par de vrais écouteurs d'événements
