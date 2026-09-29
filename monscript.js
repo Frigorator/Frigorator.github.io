@@ -1,33 +1,174 @@
-// CODE A IMPLEMENTER
-const son = new Audio('meeeh.mp3');
-
-
-const chevre=document.getElementById("goat");
-chevre.addEventListener('click',meeeh);
-function meeeh()
-{
-        chevre.src="goat_meh.jpg";
-    chevre.classList.remove("animer");
-    void chevre.offsetWidth;
-    chevre.classList.add("animer");
-    son.play();
+// Vérifie la collision entre deux balises HTML
+function checkCollisions(box1, box2){			
+	if((box2.offsetLeft >= box1.offsetLeft + box1.clientWidth)      // trop à droite
+		|| (box2.offsetLeft + box2.clientWidth <= box1.offsetLeft) // trop à gauche
+		|| (box2.offsetTop >= box1.offsetTop + box1.clientHeight) // trop en bas
+		|| (box2.offsetTop + box2.clientHeight <= box1.offsetTop))  // trop en haut
+			return false; 
+	else
+			return true; 
 }
 
-chevre.addEventListener("animationend",()=>{
-chevre.src="goat.jpg";
-})
+window.addEventListener('deviceorientation', (event) => {
+  // Rotation autour de l'axe Z (0 à 360 degrés) - Boussole
+  const alpha = event.alpha; 
 
-window.addEventListener("deviceorientation", event => {
-    
-    // gamma is the left-to-right tilt in degrees
-    const gamma = event.gamma;
-    console.log("test")
-    if (gamma > 80)
-    {
-        meeeh();
+  // Rotation autour de l'axe X (-180 à 180 degrés) - Avant/Arrière
+  const beta = event.beta;   
+
+  // Rotation autour de l'axe Y (-90 à 90 degrés) - Gauche/Droite
+  const gamma = event.gamma; 
+
+  console.log(`Alpha: ${alpha}, Beta: ${beta}, Gamma: ${gamma}`);
+});
+// 1. Déclencher la demande suite à une action utilisateur (obligatoire sur iOS)
+async function obtenirRotationDepart() {
+    // 2. Écouter le tout premier événement généré
+    const recupererPremiereValeur = (event) => {
+      // Les trois axes de rotation (en degrés)
+      const alpha = event.alpha; // Rotation autour de l'axe Z (boussole : 0 à 360)
+      const beta  = event.beta;  // Inclinaison avant/arrière (axe X : -180 à 180)
+      const gamma = event.gamma; // Inclinaison gauche/droite (axe Y : -90 à 90)
+      // Traiter la valeur de départ ici...
+
+      // 3. Supprimer immédiatement l'écouteur pour ne pas suivre les mouvements futurs
+      window.removeEventListener('deviceorientation', recupererPremiereValeur);
+    };
+
+    window.addEventListener('deviceorientation', recupererPremiereValeur);
+}
+let positionalphaActuelle=0;
+let positionbetaActuelle=0;
+window.addEventListener=obtenirRotationalpha('deviceorientation',()=>{
+	positionalphaActuelle=Event.alpha
+})
+window.addEventListener=obtenirRotationbetta('deviceorientation',()=>{
+	positionbetaActuelle=Event.beta
+})
+let positionDebase=obtenirRotationDepart();
+let vaisseau=document.getElementById("starship");
+function bougerEnfoctionDeRotation()
+{
+	vaisseau.style.left+=(positionalphaActuelle - positionDebase.alpha);
+	vaisseau.style.top+=(positionbetaActuelle - positionDebase.beta);
+}
+
+setInterval(()=>bougerEnfoctionDeRotation(),100)
+ let vaisseaux = document.querySelector("#starship");
+let monde = document.querySelector("#monde");
+let asteroids = document.querySelector("#asteroids");
+
+// Vérifie la collision entre deux balises HTML
+function checkCollisions(box1, box2){           
+    if((box2.offsetLeft >= box1.offsetLeft + box1.clientWidth)      // trop à droite
+        || (box2.offsetLeft + box2.clientWidth <= box1.offsetLeft) // trop à gauche
+        || (box2.offsetTop >= box1.offsetTop + box1.clientHeight) // trop en bas
+        || (box2.offsetTop + box2.clientHeight <= box1.offsetTop))  // trop en haut $
+        {
+            // Pas collision
+            return false; 
+        } else {
+            // Collision
+            return true; 
+        }
+}
+
+async function obtenirRotationDepart() {
+    // 2. Écouter le tout premier événement généré
+    const recupererPremiereValeur = (event) => {
+      // Les trois axes de rotation (en degrés)
+      // Traiter la valeur de départ ici...
+      positionDebase.alpha = event.alpha;
+      positionDebase.beta = event.beta;
+      positionDebase.gamma = event.gamma;
+
+      // 3. Supprimer immédiatement l'écouteur pour ne pas suivre les mouvements futurs
+      window.removeEventListener('deviceorientation', recupererPremiereValeur);
+    };
+
+    window.addEventListener('deviceorientation', recupererPremiereValeur);
+}
+
+
+// Correction syntaxe : Remplacement des assignations erronées (=) par de vrais écouteurs d'événements
+window.addEventListener('deviceorientation', (event) => {
+    positionalphaActuelle = event.alpha; // "event" en minuscules
+});
+
+window.addEventListener('deviceorientation', (event) => {
+    positionbetaActuelle = event.beta; // "event" en minuscules
+});
+
+// Initialisation de l'objet pour éviter l'erreur "undefined" lors du calcul
+// Appel de la fonction pour lancer l'écoute de départ
+
+function bougerEnfoctionDeRotation()
+{
+    // Calcul des déplacements théoriques
+    let deltaX = positionalphaActuelle - positionDebase.alpha;
+    let deltaY = positionbetaActuelle - positionDebase.beta;
+
+    // Récupération des positions numériques actuelles pour pouvoir additionner correctement les pixels
+    let actuelLeft = parseFloat(vaisseau.style.left) || window.innerWidth / 2;
+    let actuelTop = parseFloat(vaisseau.style.top) || window.innerHeight / 2;
+
+    let futurLeft = actuelLeft + deltaX;
+    let futurTop = actuelTop + deltaY;
+
+    // --- COLLISIONS BORDS FENÊTRE ---
+    // Limites horizontales (vaisseau de 54px)
+    if (futurLeft < 0) {
+        futurLeft = 0;
+    } else if (futurLeft > window.innerWidth - 54) {
+        futurLeft = window.innerWidth - 54;
     }
-})
-// Quand on clique sur l'image de la chèvre elle fait le son et l'animation
 
-// Attraper les événements de changement d'orientation, si l'angle change et 
-// que le téléphone est à l'enver alors faire comme si on clique sur la chèvre
+    // Limites verticales (vaisseau de 54px)
+    if (futurTop < 0) {
+        futurTop = 0;
+    } else if (futurTop > window.innerHeight - 54) {
+        futurTop = window.innerHeight - 54;
+    }
+
+    // Application des styles corrigés avec l'unité "px"
+    vaisseau.style.left = futurLeft + "px";
+    vaisseau.style.top = futurTop + "px";
+}
+
+setInterval(() => bougerEnfoctionDeRotation(), 50);
+
+const jeu = setInterval(() => {
+    const asteroidsClone = asteroids.cloneNode(true);
+
+    asteroidsClone.classList.add("asteroid");
+
+    monde.appendChild(asteroidsClone);
+
+    let positionLeft = 90; 
+
+    let randomPercent = Math.random() * 100; 
+
+    asteroidsClone.style.top = `calc(${randomPercent}% - ${randomPercent / 100 * 54}px)`;
+
+    const mouvement = setInterval(() => {
+        if(checkCollisions(asteroidsClone, monde) == false) {
+            
+            clearInterval(mouvement);
+            asteroidsClone.remove();
+        } else {
+        positionLeft -= 0.5;
+        
+        asteroidsClone.style.left = positionLeft + "%";
+        }
+
+        if (checkCollisions(vaisseaux, asteroidsClone) == true) {
+            vaisseaux.style.backgroundImage = `url("../gif/explosion.gif")`;
+
+            clearInterval(jeu)
+            setTimeout(() => {
+                location.reload();
+            }, 1200)
+        }
+    }, 10);
+}, 1000);
+/* Script pour le programme */
