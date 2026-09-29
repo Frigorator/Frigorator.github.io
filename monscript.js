@@ -166,4 +166,9 @@ const jeu = setInterval(() => {
         }
     }, 10);
 }, 1000);
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js");
+  });
+}
 /* Script pour le programme */
