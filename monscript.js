@@ -39,12 +39,6 @@ async function obtenirRotationDepart() {
 }
 let positionalphaActuelle=0;
 let positionbetaActuelle=0;
-window.addEventListener=obtenirRotationalpha('deviceorientation',()=>{
-	positionalphaActuelle=Event.alpha
-})
-window.addEventListener=obtenirRotationbetta('deviceorientation',()=>{
-	positionbetaActuelle=Event.beta
-})
 let positionDebase=obtenirRotationDepart();
 let vaisseau=document.getElementById("starship");
 function bougerEnfoctionDeRotation()
