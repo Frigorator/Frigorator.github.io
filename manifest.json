@@ -9,12 +9,14 @@
     {
       "src": "/vaisseaux.png",
       "sizes": "320x320",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose":"any"
     },
     {
       "src": "/vaisseaux.png",
       "sizes": "320x320",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose":"any"
     }
   ],
   "screenshots": [
@@ -22,12 +24,14 @@
       "src": "/vaisseaux.png",
       "sizes": "320x320",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "purpose":"any"
     },
     {
       "src": "/vaisseaux.png",
       "sizes": "320x320",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose":"any"
     }
   ]
 }
