@@ -168,7 +168,9 @@ const jeu = setInterval(() => {
 }, 1000);
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js");
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("Service Worker enregistré"))
+      .catch(error => console.error("Erreur Service Worker :", error));
   });
 }
 /* Script pour le programme */

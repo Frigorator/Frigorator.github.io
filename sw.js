@@ -11,7 +11,8 @@ const FILES_TO_CACHE = [
   "/monscript.js",
   "/explosion.gif",
   "/background.jpg",
-  "/asteroid.png"
+  "/asteroid.png",
+  "/vaisseaux.png"
 ];
 
 self.addEventListener("install", event => {
