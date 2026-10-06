@@ -5,33 +5,12 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
-  "icons": [
-    {
-      "src": "/vaisseaux.png",
-      "sizes": "320x320",
-      "type": "image/png",
-      "purpose":"any"
-    },
-    {
-      "src": "/vaisseaux.png",
-      "sizes": "320x320",
-      "type": "image/png",
-      "purpose":"any"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/vaisseaux.png",
-      "sizes": "320x320",
-      "type": "image/png",
-      "form_factor": "wide",
-      "purpose":"any"
-    },
-    {
-      "src": "/vaisseaux.png",
-      "sizes": "320x320",
-      "type": "image/png",
-      "purpose":"any"
-    }
-  ]
+"icons": [
+  {
+    "src": "/vaisseaux.png",
+    "sizes": "320x320",
+    "type": "image/png",
+    "purpose": "any"
+  }
+]
 }
