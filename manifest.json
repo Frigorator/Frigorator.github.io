@@ -8,25 +8,25 @@
   "icons": [
     {
       "src": "/vaisseaux.png",
-      "sizes": "161x111",
+      "sizes": "320x320",
       "type": "image/png"
     },
     {
       "src": "/vaisseaux.png",
-      "sizes": "161x111",
+      "sizes": "320x320",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
       "src": "/vaisseaux.png",
-      "sizes": "161x111",
+      "sizes": "320x320",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
       "src": "/vaisseaux.png",
-      "sizes": "161x111",
+      "sizes": "320x320",
       "type": "image/png"
     }
   ]
